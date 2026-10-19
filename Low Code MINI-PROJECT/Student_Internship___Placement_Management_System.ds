@@ -1,0 +1,3192 @@
+/*
+ * Author       : srenith.cn.2024.aiml_raja275
+ * Generated on : 19-Oct-2026 17:47:19
+ * Version      : 1.0
+ */
+ application "Student Internship & Placement Management System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Company_Registration_Form
+		{
+			title 
+    		{
+				displayname = "Company Registration Form"
+    			on add = "Add Company"
+   	 			on edit = "Edit Company"
+			}
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Industry
+			(
+				type = picklist
+				maxchar = 100
+				values = {"IT","Healthcare","Finance","Manufacturing","Retail","Education","Consulting","Telecommunications","Automotive","Energy"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have HR_Contact_Person
+			(
+    			type = text
+				displayname = "HR Contact Person"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Company_Website
+			(
+    			type = url
+				displayname = "Company Website"
+				enable  linkname
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Company_ID
+			(
+    			type = autonumber
+				displayname = "Company ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have HR_Email
+			(
+    			type = email
+				displayname = "HR Email"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Company_Name
+			(
+    			type = text
+				displayname = "Company Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Company_Address
+			(
+    			type = address
+				displayname = "Company Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Company_Description
+			(
+    			type = textarea
+				displayname = "Company Description"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Company_Status
+			(
+				type = picklist
+				displayname = "Company Status"
+				maxchar = 100
+				values = {"Active","Inactive"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have HR_Phone_Number
+			(
+    			type = phonenumber
+				displayname = "HR Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Internship_Application_Form
+		{
+			displayname = "Internship Application Form"
+			success message = "Application submitted successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Internship_Opportunity
+			(
+				type = picklist	
+				displayname = "Internship Opportunity"
+				values  = Internship_Opportunity_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Application_Status
+			(
+				type = picklist
+				displayname = "Application Status"
+				maxchar = 100
+				values = {"Applied","Under Review","Shortlisted","Selected","Rejected","Withdrawn"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Cover_Letter
+			(
+    			type = textarea
+				displayname = "Cover Letter"
+				height = 5px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Recruiter_Remarks
+			(
+    			type = textarea
+				displayname = "Recruiter Remarks"
+				height = 4px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Application_ID
+			(
+    			type = autonumber
+				displayname = "Application ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Application_Date
+			(
+    			type = date
+				displayname = "Application Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Student
+			(
+				type = picklist	
+				values  = Student_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Resume
+			(
+    			type = upload file
+				browse = local_drive
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Internship_Completion_Form
+		{
+			displayname = "Internship Completion Form"
+			success message = "Internship completion recorded successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Company
+			(
+				type = picklist	
+				values  = Company_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Completion_Status
+			(
+				type = picklist
+				displayname = "Completion Status"
+				maxchar = 100
+				values = {"In Progress","Completed","Not Completed"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Internship_Application
+			(
+				type = picklist	
+				displayname = "Internship Application"
+				values  = Internship_Application_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Internship_End_Date
+			(
+    			type = date
+				displayname = "Internship End Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Completion_ID
+			(
+    			type = autonumber
+				displayname = "Completion ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Certificate_Upload
+			(
+    			type = upload file
+				displayname = "Certificate Upload"
+				browse = local_drive
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Supervisor_Feedback
+			(
+    			type = textarea
+				displayname = "Supervisor Feedback"
+				height = 4px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Student
+			(
+				type = picklist	
+				values  = Student_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Internship_Start_Date
+			(
+    			type = date
+				displayname = "Internship Start Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Internship_Opportunity_Form
+		{
+			title 
+    		{
+				displayname = "Internship Opportunity Form"
+    			on add = "Add Internship"
+   	 			on edit = "Edit Internship"
+			}
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Internship_Duration
+			(
+				type = number
+				displayname = "Internship Duration"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Available_Positions
+			(
+				type = number
+				displayname = "Available Positions"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Maximum_Backlogs_Allowed
+			(
+				type = number
+				displayname = "Maximum Backlogs Allowed"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Internship_Status
+			(
+				type = picklist
+				displayname = "Internship Status"
+				maxchar = 100
+				values = {"Open","Closed","Cancelled"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Company
+			(
+				type = picklist	
+				values  = Company_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Internship_End_Date
+			(
+    			type = date
+				displayname = "Internship End Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Minimum_CGPA
+			(
+				type = decimal
+				displayname = "Minimum CGPA"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Application_Deadline
+			(
+    			type = date
+				displayname = "Application Deadline"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Eligible_Departments
+			(
+    			type = textarea
+				displayname = "Eligible Departments"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Internship_Type
+			(
+				type = picklist
+				displayname = "Internship Type"
+				maxchar = 100
+				values = {"Remote","On-site","Hybrid"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Internship_ID
+			(
+    			type = autonumber
+				displayname = "Internship ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Required_Skills
+			(
+    			type = textarea
+				displayname = "Required Skills"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Internship_Start_Date
+			(
+    			type = date
+				displayname = "Internship Start Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Internship_Description
+			(
+    			type = textarea
+				displayname = "Internship Description"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Internship_Title
+			(
+    			type = text
+				displayname = "Internship Title"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Stipend_Amount
+			(
+				displayname = "Stipend Amount"
+				type = INR
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Interview_Schedule_Form
+		{
+			displayname = "Interview Schedule Form"
+			success message = "Interview scheduled successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Company
+			(
+				type = picklist	
+				values  = Company_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Interview_Time
+			(
+    			type = time
+				displayname = "Interview Time"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Interview_Mode
+			(
+				type = picklist
+				displayname = "Interview Mode"
+				maxchar = 100
+				values = {"Online","Offline"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Application_Type
+			(
+				type = picklist
+				displayname = "Application Type"
+				maxchar = 100
+				values = {"Internship","Placement"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Student
+			(
+				type = picklist	
+				values  = Student_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Interview_Date
+			(
+    			type = date
+				displayname = "Interview Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Interview_Status
+			(
+				type = picklist
+				displayname = "Interview Status"
+				maxchar = 100
+				values = {"Scheduled","Completed","Rescheduled","Cancelled"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Interview_ID
+			(
+    			type = autonumber
+				displayname = "Interview ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Interview_Round
+			(
+    			type = text
+				displayname = "Interview Round"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Related_Application
+			(
+				type = picklist	
+				displayname = "Related Application"
+				values  = Internship_Application_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Interview_Feedback
+			(
+    			type = textarea
+				displayname = "Interview Feedback"
+				height = 4px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Interview_Location_Link
+			(
+    			type = text
+				displayname = "Interview Location or Meeting Link"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Interview_Result
+			(
+				type = picklist
+				displayname = "Interview Result"
+				maxchar = 100
+				values = {"Pending","Passed","Failed"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Job_Opening_Form
+		{
+			title 
+    		{
+				displayname = "Job Opening Form"
+    			on add = "Add Job"
+   	 			on edit = "Edit Job"
+			}
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Available_Positions
+			(
+				type = number
+				displayname = "Available Positions"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Maximum_Backlogs_Allowed
+			(
+				type = number
+				displayname = "Maximum Backlogs Allowed"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Company
+			(
+				type = picklist	
+				values  = Company_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Work_Location
+			(
+    			type = text
+				displayname = "Work Location"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Annual_Salary_Package
+			(
+				displayname = "Annual Salary Package"
+				type = INR
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Job_Status
+			(
+				type = picklist
+				displayname = "Job Status"
+				maxchar = 100
+				values = {"Open","Closed","Cancelled"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Minimum_CGPA
+			(
+				type = decimal
+				displayname = "Minimum CGPA"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Application_Deadline
+			(
+    			type = date
+				displayname = "Application Deadline"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Eligible_Departments
+			(
+    			type = textarea
+				displayname = "Eligible Departments"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Job_Title
+			(
+    			type = text
+				displayname = "Job Title"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Job_ID
+			(
+    			type = autonumber
+				displayname = "Job ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Required_Skills
+			(
+    			type = textarea
+				displayname = "Required Skills"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Job_Description
+			(
+    			type = textarea
+				displayname = "Job Description"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Job_Type
+			(
+				type = picklist
+				displayname = "Job Type"
+				maxchar = 100
+				values = {"Full-time","Part-time","Contract"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Placement_Application_Form
+		{
+			displayname = "Placement Application Form"
+			success message = "Placement application submitted successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Application_Status
+			(
+				type = picklist
+				displayname = "Application Status"
+				maxchar = 100
+				values = {"Applied","Under Review","Shortlisted","Selected","Rejected","Withdrawn"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Recruiter_Remarks
+			(
+    			type = textarea
+				displayname = "Recruiter Remarks"
+				height = 4px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Placement_Application_ID
+			(
+    			type = autonumber
+				displayname = "Placement Application ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Job_Opening
+			(
+				type = picklist	
+				displayname = "Job Opening"
+				values  = Job_Opening_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Application_Date
+			(
+    			type = date
+				displayname = "Application Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Student
+			(
+				type = picklist	
+				values  = Student_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Resume
+			(
+    			type = upload file
+				browse = local_drive
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Placement_Offer_Form
+		{
+			displayname = "Placement Offer Form"
+			success message = "Offer details added successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Company
+			(
+				type = picklist	
+				values  = Company_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Joining_Date
+			(
+    			type = date
+				displayname = "Joining Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Offer_ID
+			(
+    			type = autonumber
+				displayname = "Offer ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Offered_Position
+			(
+    			type = text
+				displayname = "Offered Position"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Annual_Salary_Package
+			(
+				displayname = "Annual Salary Package"
+				type = INR
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Offer_Status
+			(
+				type = picklist
+				displayname = "Offer Status"
+				maxchar = 100
+				values = {"Pending","Accepted","Declined","Withdrawn"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Student
+			(
+				type = picklist	
+				values  = Student_Registration_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Related_Job_Application
+			(
+				type = picklist	
+				displayname = "Related Job Application"
+				values  = Placement_Application_Form.ID
+    			displayformat = [ID]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Offer_Date
+			(
+    			type = date
+				displayname = "Offer Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Student_Registration_Form
+		{
+			title 
+    		{
+				displayname = "Student Registration Form"
+    			on add = "Add Student"
+   	 			on edit = "Edit Student"
+			}
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Graduation_Year
+			(
+				type = number
+				displayname = "Graduation Year"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			LinkedIn_Profile_URL
+			(
+    			type = url
+				displayname = "LinkedIn Profile URL"
+				enable  linkname
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Degree
+			(
+				type = picklist
+				maxchar = 100
+				values = {"B.Tech","B.E","M.Tech","M.E","B.Sc","M.Sc","BCA","MCA"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Certifications
+			(
+    			type = textarea
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Email_Address
+			(
+    			type = email
+				displayname = "Email Address"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have CGPA
+			(
+				type = decimal
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Programming_Languages
+			(
+    			type = textarea
+				displayname = "Programming Languages"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Current_Semester
+			(
+				type = number
+				displayname = "Current Semester"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Student_Status
+			(
+				type = picklist
+				displayname = "Student Status"
+				maxchar = 100
+				values = {"Active","Graduated","Inactive"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Backlogs_Count
+			(
+				type = number
+				displayname = "Backlogs Count"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Technical_Skills
+			(
+    			type = textarea
+				displayname = "Technical Skills"
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Full_Name
+			(
+    			type = name
+				displayname = "Full Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have unique Register_Number
+			(
+    			type = text
+				displayname = "Register Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Department
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Computer Science","Electronics","Mechanical","Civil","Information Technology","Electrical","Biotechnology","Chemical"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Student_ID
+			(
+    			type = autonumber
+				displayname = "Student ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			GitHub_Profile_URL
+			(
+    			type = url
+				displayname = "GitHub Profile URL"
+				enable  linkname
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Resume_Upload
+			(
+    			type = upload file
+				displayname = "Resume Upload"
+				browse = local_drive
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		list Internship_Completions
+		{
+			displayName = "Internship Completions"
+			show all rows from Internship_Completion_Form    
+			(
+				Completion_ID as "Completion ID"
+				Student
+				Company
+				Internship_Start_Date as "Internship Start Date"
+				(
+					displayformat = fulldate
+				)
+				Internship_End_Date as "Internship End Date"
+				(
+					displayformat = fulldate
+				)
+				Completion_Status as "Completion Status"
+				Internship_Application as "Internship Application"
+				Supervisor_Feedback as "Supervisor Feedback"
+				Certificate_Upload as "Certificate Upload"
+			)
+			sort by
+			(
+				Internship_End_Date descending
+			)
+		}
+		list Internship_List
+		{
+			displayName = "Internship List"
+			show all rows from Internship_Opportunity_Form    
+			(
+				Internship_Title as "Internship Title"
+				Internship_ID as "Internship ID"
+				Company
+				Internship_Type as "Internship Type"
+				Internship_Status as "Internship Status"
+				Internship_Start_Date as "Internship Start Date"
+				(
+					displayformat = fulldate
+				)
+				Internship_End_Date as "Internship End Date"
+				(
+					displayformat = fulldate
+				)
+				Available_Positions as "Available Positions"
+				Stipend_Amount as "Stipend Amount"
+				(
+					display = average	
+				)
+				Internship_Duration as "Internship Duration"
+				Minimum_CGPA as "Minimum CGPA"
+				Maximum_Backlogs_Allowed as "Maximum Backlogs Allowed"
+				Application_Deadline as "Application Deadline"
+				(
+					displayformat = fulldate
+				)
+				Eligible_Departments as "Eligible Departments"
+				Required_Skills as "Required Skills"
+				Internship_Description as "Internship Description"
+			)
+			sort by
+			(
+				Internship_Start_Date ascending
+			)
+		}
+		list Job_List
+		{
+			displayName = "Job List"
+			show all rows from Job_Opening_Form    
+			(
+				Job_Title as "Job Title"
+				Job_ID as "Job ID"
+				Company
+				Job_Type as "Job Type"
+				Job_Status as "Job Status"
+				Work_Location as "Work Location"
+				Annual_Salary_Package as "Annual Salary Package"
+				(
+					display = average	
+				)
+				Application_Deadline as "Application Deadline"
+				(
+					displayformat = fulldate
+				)
+				Available_Positions as "Available Positions"
+				Minimum_CGPA as "Minimum CGPA"
+				Maximum_Backlogs_Allowed as "Maximum Backlogs Allowed"
+				Eligible_Departments as "Eligible Departments"
+				Required_Skills as "Required Skills"
+				Job_Description as "Job Description"
+			)
+			sort by
+			(
+				Application_Deadline ascending
+			)
+		}
+		list Internship_Applications
+		{
+			displayName = "Internship Applications"
+			show all rows from Internship_Application_Form    
+			(
+				Application_ID as "Application ID"
+				Student
+				Internship_Opportunity as "Internship Opportunity"
+				Application_Date as "Application Date"
+				(
+					displayformat = fulldate
+				)
+				Application_Status as "Application Status"
+				Cover_Letter as "Cover Letter"
+				Recruiter_Remarks as "Recruiter Remarks"
+				Resume
+			)
+			sort by
+			(
+				Application_Date descending
+			)
+		}
+		list Company_List
+		{
+			displayName = "Company List"
+			show all rows from Company_Registration_Form    
+			(
+				Company_Name as "Company Name"
+				Company_ID as "Company ID"
+				Industry
+				HR_Contact_Person as "HR Contact Person"
+				HR_Email as "HR Email"
+				HR_Phone_Number as "HR Phone Number"
+				(
+					displayformat = formattednumber 
+				)
+				Company_Status as "Company Status"
+				Company_Website as "Company Website"
+				Company_Description as "Company Description"
+				Company_Address  as "Company Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+			)
+			sort by
+			(
+				Company_Name ascending
+			)
+		}
+		list Placement_Offers
+		{
+			displayName = "Placement Offers"
+			show all rows from Placement_Offer_Form    
+			(
+				Offer_ID as "Offer ID"
+				Student
+				Company
+				Offered_Position as "Offered Position"
+				Offer_Date as "Offer Date"
+				(
+					displayformat = fulldate
+				)
+				Offer_Status as "Offer Status"
+				Annual_Salary_Package as "Annual Salary Package"
+				(
+					display = average	
+				)
+				Joining_Date as "Joining Date"
+				(
+					displayformat = fulldate
+				)
+				Related_Job_Application as "Related Job Application"
+			)
+			sort by
+			(
+				Offer_Date descending
+			)
+		}
+		list Interview_List
+		{
+			displayName = "Interview List"
+			show all rows from Interview_Schedule_Form    
+			(
+				Interview_ID as "Interview ID"
+				Student
+				Company
+				Interview_Date as "Interview Date"
+				(
+					displayformat = fulldate
+				)
+				Interview_Time as "Interview Time"
+				Interview_Round as "Interview Round"
+				Application_Type as "Application Type"
+				Interview_Status as "Interview Status"
+				Interview_Mode as "Interview Mode"
+				Interview_Location_Link as "Interview Location or Meeting Link"
+				Related_Application as "Related Application"
+				Interview_Feedback as "Interview Feedback"
+				Interview_Result as "Interview Result"
+			)
+			sort by
+			(
+				Interview_Date ascending
+			)
+		}
+		list Student_List
+		{
+			displayName = "Student List"
+			show all rows from Student_Registration_Form    
+			(
+				Full_Name  as "Full Name"
+				Register_Number as "Register Number"
+				Email_Address as "Email Address"
+				Phone_Number as "Phone Number"
+				(
+					displayformat = formattednumber 
+				)
+				Department
+				Student_Status as "Student Status"
+				CGPA
+				(
+					display = average	
+				)
+				Graduation_Year as "Graduation Year"
+				Current_Semester as "Current Semester"
+				Backlogs_Count as "Backlogs Count"
+				Degree
+				Technical_Skills as "Technical Skills"
+				Programming_Languages as "Programming Languages"
+				Certifications
+				LinkedIn_Profile_URL as "LinkedIn Profile URL"
+				GitHub_Profile_URL as "GitHub Profile URL"
+				Resume_Upload as "Resume Upload"
+			)
+			sort by
+			(
+				Full_Name.first_name ascending
+			)
+		}
+		list Placement_Applications
+		{
+			displayName = "Placement Applications"
+			show all rows from Placement_Application_Form    
+			(
+				Placement_Application_ID as "Placement Application ID"
+				Student
+				Job_Opening as "Job Opening"
+				Application_Date as "Application Date"
+				(
+					displayformat = fulldate
+				)
+				Application_Status as "Application Status"
+				Recruiter_Remarks as "Recruiter Remarks"
+				Resume
+			)
+			sort by
+			(
+				Application_Date descending
+			)
+		}
+	}
+	pages
+	{
+		page Student_Placement_Dashboard
+		{
+			displayname = "Student Placement Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Total_Students_Card.stat.tinted.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'theme:10'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Students'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme:75'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.Student_Registration_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Total_Companies_Card.stat.tinted.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'theme:10'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Companies'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme:75'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.Company_Registration_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='34%'\n   \t>\n\t<panel elementName='Total_Internship_Apps_Card.stat.tinted.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'theme:10'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Internship Applications'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme:75'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.Internship_Application_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Total_Placement_Apps_Card.stat.tinted.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'theme:10'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Placement Applications'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme:75'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.Placement_Application_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Total_Placement_Offers_Car.stat.tinted.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'theme:10'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Placement Offers'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme:75'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.Placement_Offer_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='34%'\n   \t>\n\t<panel elementName='Completed_Internships_Card.stat.tinted.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'theme:10'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Completed Internships'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = 'theme:75'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'Completion_Status == &quot;Completed&quot;'\n\t  value = 'thisapp.Internship_Completion_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart'\n\n\t\n\ttitle = 'Students by Department'\n\t\n\ttype = 'Pie'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Student_Registration_Form'\n\txfield = 'Department'\n\tyfields = 'count:Student_ID'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'Internship Applications by Status'\n\t\n\ttype = 'Pie'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Internship_Application_Form'\n\txfield = 'Application_Status'\n\tyfields = 'count:Application_ID'\n/>\n\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<chart \n\telementName='Chart 2'\n\n\t\n\ttitle = 'Placement Applications by Status'\n\t\n\ttype = 'Pie'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Placement_Application_Form'\n\txfield = 'Application_Status'\n\tyfields = 'count:Placement_Application_ID'\n/>\n\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			Set_Student_Status_Active as "Set Student Status to Active"
+			{
+				type =  form
+				form = Student_Registration_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Set the Student Status field to 'Active' when the form loads
+										input.Student_Status = "Active";
+						)
+					}
+				}
+
+			}
+			Set_Placement_Application_Status_Applied as "Set Placement Application Status to Applied"
+			{
+				type =  form
+				form = Placement_Application_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Set the Application Status field to "Applied" when the form loads
+										input.Application_Status = "Applied";
+						)
+					}
+				}
+
+			}
+			Set_Interview_Status_Scheduled as "Set Interview Status to Scheduled"
+			{
+				type =  form
+				form = Interview_Schedule_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Set the Interview_Status field to "Scheduled" on form load
+										input.Interview_Status = "Scheduled";
+						)
+					}
+				}
+
+			}
+			Set_Placement_Offer_Status_Pending as "Set Placement Offer Status to Pending"
+			{
+				type =  form
+				form = Placement_Offer_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Set the Offer Status field to 'Pending' when the form loads
+										input.Offer_Status = "Pending";
+						)
+					}
+				}
+
+			}
+			Set_Internship_Application_Status_Applied as "Set Internship Application Status to Applied"
+			{
+				type =  form
+				form = Internship_Application_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Set the Application Status field to "Applied" when the form loads
+										input.Application_Status = "Applied";
+						)
+					}
+				}
+
+			}
+			Placement_Application_Validation as "Placement Application Validation"
+			{
+				type =  form
+				form = Placement_Application_Form
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Check if Student field is provided
+										if(input.Student.isNull())
+										{
+											alert "Student field is required";
+											cancel submit;
+										}
+										// Check if Job_Opening field is provided
+										if(input.Job_Opening.isNull())
+										{
+											alert "Job Opening field is required";
+											cancel submit;
+										}
+										// Fetch the related Job Opening record to validate status and deadline
+										jobRecord = Job_Opening_Form[ID == input.Job_Opening];
+										// Validate Job Status is Open
+										if(jobRecord.Job_Status != "Open")
+										{
+											alert "This job opening is no longer available (Status: " + jobRecord.Job_Status + ")";
+											cancel submit;
+										}
+										// Validate Application Deadline has not passed
+										if(input.Application_Date > jobRecord.Application_Deadline)
+										{
+											alert "Application deadline has passed (Deadline: " + jobRecord.Application_Deadline + ")";
+											cancel submit;
+										}
+										// Check for duplicate applications by the same student for the same job
+										duplicateCheck = Placement_Application_Form[Student == input.Student && Job_Opening == input.Job_Opening];
+										if(duplicateCheck.count() > 0)
+										{
+											alert "You have already applied for this job opening";
+											cancel submit;
+										}
+										// Validate Resume is uploaded
+										if(input.Resume.isNull())
+										{
+											alert "Resume upload is required";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Placement_Offer_Validation as "Placement Offer Validation"
+			{
+				type =  form
+				form = Placement_Offer_Form
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Validate required fields and positive salary for Placement Offer submission
+										// Check if Student lookup is provided
+										if(input.Student.isNull())
+										{
+											alert(Student,"Student selection is required");
+											cancel submit;
+										}
+										// Check if Company lookup is provided
+										if(input.Company.isNull())
+										{
+											alert(Company,"Company selection is required");
+											cancel submit;
+										}
+										// Check if Offered Position is provided
+										if(input.Offered_Position.isBlank())
+										{
+											alert(Offered_Position,"Offered Position is required");
+											cancel submit;
+										}
+										// Check if Joining Date is provided
+										if(input.Joining_Date.isNull())
+										{
+											alert(Joining_Date,"Joining Date is required");
+											cancel submit;
+										}
+										// Validate Annual Salary Package is positive
+										if(input.Annual_Salary_Package.isNull())
+										{
+											alert(Annual_Salary_Package,"Annual Salary Package is required");
+											cancel submit;
+										}
+										else if(input.Annual_Salary_Package <= 0)
+										{
+											alert(Annual_Salary_Package,"Annual Salary Package must be a positive value");
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Internship_Application_Validation as "Internship Application Validation"
+			{
+				type =  form
+				form = Internship_Application_Form
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Validate required fields
+										if(input.Student.isNull() || input.Internship_Opportunity.isNull() || input.Resume.isNull())
+										{
+											alert "All required fields (Student, Internship Opportunity, and Resume) must be filled.";
+										}
+										// Validate Internship Opportunity status
+										if(!input.Internship_Opportunity.isNull())
+										{
+											opportunityRecord = Internship_Opportunity_Form[ID == input.Internship_Opportunity];
+											if(opportunityRecord.Internship_Status != "Open")
+											{
+												alert "The selected internship opportunity is no longer open for applications.";
+											}
+											// Validate Application Deadline
+											if(opportunityRecord.Application_Deadline < zoho.currentdate)
+											{
+												alert "The application deadline for this internship has passed.";
+											}
+											// Validate Minimum CGPA if applicable
+											if(!opportunityRecord.Minimum_CGPA.isNull() && !input.Student.isNull())
+											{
+												studentRecord = Student_Registration_Form[ID == input.Student];
+												if(studentRecord.CGPA < opportunityRecord.Minimum_CGPA)
+												{
+													alert "Your CGPA does not meet the minimum requirement for this internship.";
+												}
+											}
+										}
+										// Check for duplicate applications by the same student for the same opportunity
+										if(!input.Student.isNull() && !input.Internship_Opportunity.isNull())
+										{
+											duplicateCheck = Internship_Application_Form[Student == input.Student && Internship_Opportunity == input.Internship_Opportunity && ID != input.ID];
+											if(duplicateCheck.count() > 0)
+											{
+												alert "You have already applied for this internship opportunity.";
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Set_Internship_Completion_Status_In_Progress as "Set Internship Completion Status to In Progress"
+			{
+				type =  form
+				form = Internship_Completion_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Check if Completion_Status is empty and set default value
+										if(input.Completion_Status.isEmpty())
+										{
+											input.Completion_Status = "In Progress";
+										}
+						)
+					}
+				}
+
+			}
+			Set_Interview_Status_to_Scheduled as "Set Interview Status to Scheduled"
+			{
+				type =  form
+				form = Interview_Schedule_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Set default Interview Status to 'Scheduled' if the field is empty
+										if(input.Interview_Status.isNull() || input.Interview_Status.isEmpty())
+										{
+											input.Interview_Status = "Scheduled";
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "SIP"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Company_Registration_Form
+			{
+				label placement = left
+			}
+			form Internship_Application_Form
+			{
+				label placement = left
+			}
+			form Internship_Completion_Form
+			{
+				label placement = left
+			}
+			form Internship_Opportunity_Form
+			{
+				label placement = left
+			}
+			form Interview_Schedule_Form
+			{
+				label placement = left
+			}
+			form Job_Opening_Form
+			{
+				label placement = left
+			}
+			form Placement_Application_Form
+			{
+				label placement = left
+			}
+			form Placement_Offer_Form
+			{
+				label placement = left
+			}
+			form Student_Registration_Form
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report Internship_Completions
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Completion_ID as "Completion ID"
+								Student
+								Company
+								Internship_Start_Date as "Internship Start Date"
+								Internship_End_Date as "Internship End Date"
+								Completion_Status as "Completion Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						completion_details
+						(
+		     				title = "Completion Details"
+							fields
+							(
+								Completion_ID as "Completion ID"
+								Student
+								Company
+								Internship_Start_Date as "Internship Start Date"
+								Internship_End_Date as "Internship End Date"
+								Completion_Status as "Completion Status"
+								Internship_Application as "Internship Application"
+								Supervisor_Feedback as "Supervisor Feedback"
+								Certificate_Upload as "Certificate Upload"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Internship_List
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Internship_Title as "Internship Title"
+								Internship_ID as "Internship ID"
+								Company
+								Internship_Type as "Internship Type"
+								Internship_Status as "Internship Status"
+								Internship_Start_Date as "Internship Start Date"
+								Internship_End_Date as "Internship End Date"
+								Available_Positions as "Available Positions"
+								Stipend_Amount as "Stipend Amount"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						internship_details
+						(
+		     				title = "Internship Details"
+							fields
+							(
+								Internship_Title as "Internship Title"
+								Internship_ID as "Internship ID"
+								Company
+								Internship_Type as "Internship Type"
+								Internship_Status as "Internship Status"
+								Internship_Start_Date as "Internship Start Date"
+								Internship_End_Date as "Internship End Date"
+								Available_Positions as "Available Positions"
+								Stipend_Amount as "Stipend Amount"
+								Internship_Duration as "Internship Duration"
+								Minimum_CGPA as "Minimum CGPA"
+								Maximum_Backlogs_Allowed as "Maximum Backlogs Allowed"
+								Application_Deadline as "Application Deadline"
+								Eligible_Departments as "Eligible Departments"
+								Required_Skills as "Required Skills"
+								Internship_Description as "Internship Description"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Job_List
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Job_Title as "Job Title"
+								Job_ID as "Job ID"
+								Company
+								Job_Type as "Job Type"
+								Job_Status as "Job Status"
+								Work_Location as "Work Location"
+								Annual_Salary_Package as "Annual Salary Package"
+								Application_Deadline as "Application Deadline"
+								Available_Positions as "Available Positions"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						job_details
+						(
+		     				title = "Job Details"
+							fields
+							(
+								Job_Title as "Job Title"
+								Job_ID as "Job ID"
+								Company
+								Job_Type as "Job Type"
+								Job_Status as "Job Status"
+								Work_Location as "Work Location"
+								Annual_Salary_Package as "Annual Salary Package"
+								Application_Deadline as "Application Deadline"
+								Available_Positions as "Available Positions"
+								Minimum_CGPA as "Minimum CGPA"
+								Maximum_Backlogs_Allowed as "Maximum Backlogs Allowed"
+								Eligible_Departments as "Eligible Departments"
+								Required_Skills as "Required Skills"
+								Job_Description as "Job Description"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Internship_Applications
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Application_ID as "Application ID"
+								Student
+								Internship_Opportunity as "Internship Opportunity"
+								Application_Date as "Application Date"
+								Application_Status as "Application Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						application_details
+						(
+		     				title = "Application Details"
+							fields
+							(
+								Application_ID as "Application ID"
+								Student
+								Internship_Opportunity as "Internship Opportunity"
+								Application_Date as "Application Date"
+								Application_Status as "Application Status"
+								Cover_Letter as "Cover Letter"
+								Recruiter_Remarks as "Recruiter Remarks"
+								Resume
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Company_List
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Company_Name as "Company Name"
+								Company_ID as "Company ID"
+								Industry
+								HR_Contact_Person as "HR Contact Person"
+								HR_Email as "HR Email"
+								HR_Phone_Number as "HR Phone Number"
+								Company_Status as "Company Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						company_details
+						(
+		     				title = "Company Details"
+							fields
+							(
+								Company_Name as "Company Name"
+								Company_ID as "Company ID"
+								Industry
+								HR_Contact_Person as "HR Contact Person"
+								HR_Email as "HR Email"
+								HR_Phone_Number as "HR Phone Number"
+								Company_Status as "Company Status"
+								Company_Website as "Company Website"
+								Company_Description as "Company Description"
+								Company_Address as "Company Address"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Placement_Offers
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Offer_ID as "Offer ID"
+								Student
+								Company
+								Offered_Position as "Offered Position"
+								Offer_Date as "Offer Date"
+								Offer_Status as "Offer Status"
+								Annual_Salary_Package as "Annual Salary Package"
+								Joining_Date as "Joining Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						offer_details
+						(
+		     				title = "Offer Details"
+							fields
+							(
+								Offer_ID as "Offer ID"
+								Student
+								Company
+								Offered_Position as "Offered Position"
+								Offer_Date as "Offer Date"
+								Offer_Status as "Offer Status"
+								Annual_Salary_Package as "Annual Salary Package"
+								Joining_Date as "Joining Date"
+								Related_Job_Application as "Related Job Application"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Interview_List
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Interview_ID as "Interview ID"
+								Student
+								Company
+								Interview_Date as "Interview Date"
+								Interview_Time as "Interview Time"
+								Interview_Round as "Interview Round"
+								Application_Type as "Application Type"
+								Interview_Status as "Interview Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						interview_details
+						(
+		     				title = "Interview Details"
+							fields
+							(
+								Interview_ID as "Interview ID"
+								Student
+								Company
+								Interview_Date as "Interview Date"
+								Interview_Time as "Interview Time"
+								Interview_Round as "Interview Round"
+								Application_Type as "Application Type"
+								Interview_Status as "Interview Status"
+								Interview_Mode as "Interview Mode"
+								Interview_Location_Link as "Interview Location or Meeting Link"
+								Related_Application as "Related Application"
+								Interview_Feedback as "Interview Feedback"
+								Interview_Result as "Interview Result"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Student_List
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Full_Name as "Full Name"
+								Register_Number as "Register Number"
+								Email_Address as "Email Address"
+								Phone_Number as "Phone Number"
+								Department
+								Student_Status as "Student Status"
+								CGPA
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						student_details
+						(
+		     				title = "Student Details"
+							fields
+							(
+								Full_Name as "Full Name"
+								Register_Number as "Register Number"
+								Email_Address as "Email Address"
+								Phone_Number as "Phone Number"
+								Department
+								Student_Status as "Student Status"
+								CGPA
+								Graduation_Year as "Graduation Year"
+								Current_Semester as "Current Semester"
+								Backlogs_Count as "Backlogs Count"
+								Degree
+								Technical_Skills as "Technical Skills"
+								Programming_Languages as "Programming Languages"
+								Certifications
+								LinkedIn_Profile_URL as "LinkedIn Profile URL"
+								GitHub_Profile_URL as "GitHub Profile URL"
+								Resume_Upload as "Resume Upload"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Placement_Applications
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Placement_Application_ID as "Placement Application ID"
+								Student
+								Job_Opening as "Job Opening"
+								Application_Date as "Application Date"
+								Application_Status as "Application Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						placement_application_details
+						(
+		     				title = "Placement Application Details"
+							fields
+							(
+								Placement_Application_ID as "Placement Application ID"
+								Student
+								Job_Opening as "Job Opening"
+								Application_Date as "Application Date"
+								Application_Status as "Application Status"
+								Recruiter_Remarks as "Recruiter Remarks"
+								Resume
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Student_Management
+			{
+				displayname = "Student Management"
+				icon = "education-pencil-47"
+
+				section Student_Registration_Section
+				{
+					displayname = "Student Registration"
+					icon = "education-pencil-47"
+					form  Student_Registration_Form
+					{
+						icon = "education-pencil-47"
+					}
+				}
+				section Student_List_Section
+				{
+					displayname = "Student List"
+					icon = "tech-desktop"
+					report Student_List
+					{
+						icon = "tech-desktop"
+					}
+				}
+					page Student_Placement_Dashboard
+					{
+						icon = "education-pencil-47"
+					}
+			}
+			space Company_Management
+			{
+				displayname = "Company Management"
+				icon = "business-building"
+
+				section Company_Registration_Section
+				{
+					displayname = "Company Registration"
+					icon = "business-building"
+					form  Company_Registration_Form
+					{
+						icon = "business-building"
+					}
+				}
+				section Company_List_Section
+				{
+					displayname = "Company List"
+					icon = "tech-desktop"
+					report Company_List
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			space Opportunity_Management
+			{
+				displayname = "Opportunity Management"
+				icon = "business-briefcase-24"
+
+				section Internship_Opportunity_Section
+				{
+					displayname = "Internship Opportunities"
+					icon = "business-briefcase-24"
+					form  Internship_Opportunity_Form
+					{
+						icon = "business-briefcase-24"
+					}
+				}
+				section Internship_List_Section
+				{
+					displayname = "Internship List"
+					icon = "tech-desktop"
+					report Internship_List
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Job_Opening_Section
+				{
+					displayname = "Job Openings"
+					icon = "business-briefcase-24"
+					form  Job_Opening_Form
+					{
+						icon = "business-briefcase-24"
+					}
+				}
+				section Job_List_Section
+				{
+					displayname = "Job List"
+					icon = "tech-desktop"
+					report Job_List
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			space Space
+			{
+				displayname = "Space"
+				icon = "tech-desktop"
+
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			space Application_Management
+			{
+				displayname = "Application Management"
+				icon = "tech-desktop"
+
+				section Internship_Application_Section
+				{
+					displayname = "Internship Applications"
+					icon = "tech-desktop"
+					form  Internship_Application_Form
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Internship_Applications_Section
+				{
+					displayname = "Internship Applications"
+					icon = "tech-desktop"
+					report Internship_Applications
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Placement_Application_Section
+				{
+					displayname = "Placement Applications"
+					icon = "tech-desktop"
+					form  Placement_Application_Form
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Placement_Applications_Section
+				{
+					displayname = "Placement Applications"
+					icon = "tech-desktop"
+					report Placement_Applications
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			space Interview_Management
+			{
+				displayname = "Interview Management"
+				icon = "tech-desktop"
+
+				section Interview_Schedule_Section
+				{
+					displayname = "Interview Schedules"
+					icon = "tech-desktop"
+					form  Interview_Schedule_Form
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Interview_List_Section
+				{
+					displayname = "Interview List"
+					icon = "tech-desktop"
+					report Interview_List
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			space Placement_Management
+			{
+				displayname = "Placement Management"
+				icon = "tech-desktop"
+
+				section Placement_Offer_Section
+				{
+					displayname = "Placement Offers"
+					icon = "tech-desktop"
+					form  Placement_Offer_Form
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Placement_Offers_Section
+				{
+					displayname = "Placement Offers"
+					icon = "tech-desktop"
+					report Placement_Offers
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			space Internship_Completion
+			{
+				displayname = "Internship Completion"
+				icon = "tech-desktop"
+
+				section Internship_Completion_Section
+				{
+					displayname = "Internship Completions"
+					icon = "tech-desktop"
+					form  Internship_Completion_Form
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Internship_Completions_Section
+				{
+					displayname = "Internship Completions"
+					icon = "tech-desktop"
+					report Internship_Completions
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Company_Registration_Form
+			{
+				label placement = auto
+			}
+			form Internship_Application_Form
+			{
+				label placement = auto
+			}
+			form Internship_Completion_Form
+			{
+				label placement = auto
+			}
+			form Internship_Opportunity_Form
+			{
+				label placement = auto
+			}
+			form Interview_Schedule_Form
+			{
+				label placement = auto
+			}
+			form Job_Opening_Form
+			{
+				label placement = auto
+			}
+			form Placement_Application_Form
+			{
+				label placement = auto
+			}
+			form Placement_Offer_Form
+			{
+				label placement = auto
+			}
+			form Student_Registration_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Company_Registration_Form
+			{
+				label placement = auto
+			}
+			form Internship_Application_Form
+			{
+				label placement = auto
+			}
+			form Internship_Completion_Form
+			{
+				label placement = auto
+			}
+			form Internship_Opportunity_Form
+			{
+				label placement = auto
+			}
+			form Interview_Schedule_Form
+			{
+				label placement = auto
+			}
+			form Job_Opening_Form
+			{
+				label placement = auto
+			}
+			form Placement_Application_Form
+			{
+				label placement = auto
+			}
+			form Placement_Offer_Form
+			{
+				label placement = auto
+			}
+			form Student_Registration_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = red
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
